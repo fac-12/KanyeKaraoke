@@ -4,7 +4,7 @@
   "description": "An application that accesses Kanye West videos and lyrics via APIs.",
   "main": "index.js",
   "scripts": {
-    "test": "tape ./tests/*.tests.js | tap-spec"
+    "test": "tape ./tests/tests.js | tap-spec"
   },
   "repository": {
     "type": "git",
