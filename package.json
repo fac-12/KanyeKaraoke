@@ -1,0 +1,23 @@
+{
+  "name": "kanyekaraoke",
+  "version": "1.0.0",
+  "description": "An application that accesses Kanye West videos and lyrics via APIs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape ./tests/*.tests.js | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fac-12/KanyeKaraoke.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fac-12/KanyeKaraoke/issues"
+  },
+  "homepage": "https://github.com/fac-12/KanyeKaraoke#readme",
+  "devDependencies": {
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0"
+  }
+}
