@@ -47,7 +47,7 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 
   apiFunctionArray.forEach(function(apiFunction, index) {
     apiFunction(function(obj) {
-      objArray.push(obj);
+      objArray[index] = obj;
       console.log(objArray);
       if(objArray.length === 2) callbackHandler(objArray);
     })
@@ -58,38 +58,38 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 
 //callback Handler
 function callbackHandler (objArray) {
-  if (objArray[1].album == null){
-    errorHandler();
-  } else {
-    successYtObj(objArray);
+    clearPage();
+  if (objArray[1].album !== null && objArray[0].items.length > 0) {
     successKwObj(objArray);
+    successYtObj(objArray);
+  } else {
+    errorHandler();
   }
 }
+
 
 function errorHandler(){
   var errorMsg = document.createElement('p');
   errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
-
-  while (resultSection.firstChild) {
-    resultSection.removeChild(resultSection.firstChild);
-  }
   resultSection.appendChild(errorMsg);
 }
 
 function successYtObj(objArray){
-  while (resultSection.firstChild) {
-    resultSection.removeChild(resultSection.firstChild);
-  }
   var iframe = document.createElement('iframe');
   iframe.src = "https://www.youtube.com/embed/" + objArray[0].items[0].id.videoId;
   resultSection.appendChild(iframe);
 }
 
 function successKwObj(objArray){
-  var text = document.createTextNode(objArray[1].lyrics);
+  var p = document.createElement('p')
+  p.innerText = objArray[1].lyrics;
   var div = document.createElement('div');
-  var p = document.createElement('p');
-  p.appendChild(text);
   div.appendChild(p);
   resultSection.appendChild(div);
+}
+
+function clearPage(){
+  while (resultSection.firstChild) {
+    resultSection.removeChild(resultSection.firstChild);
+  }
 }
