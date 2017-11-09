@@ -60,8 +60,8 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 function callbackHandler (objArray) {
     clearPage();
   if (objArray[1].album !== null && objArray[0].items) {
-    successKwObj(objArray);
     successYtObj(objArray);
+    successKwObj(objArray);
   } else {
     errorHandler();
   }
@@ -77,13 +77,19 @@ function errorHandler(){
 function successYtObj(objArray){
   var iframe = document.createElement('iframe');
   iframe.src = "https://www.youtube.com/embed/" + objArray[0].items[0].id.videoId;
+  iframe.classList = 'iframe';
   resultSection.appendChild(iframe);
 }
 
 function successKwObj(objArray){
+  var title = document.getElementById('songTitle');
+  var objTitle = objArray[1].title.replace('_', ' ');
+  title.innerText = objTitle.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
   var p = document.createElement('p')
   p.innerText = objArray[1].lyrics;
+  p.classList = 'lyrics';
   var div = document.createElement('div');
+  div.classList = 'lyric-container';
   div.appendChild(p);
   resultSection.appendChild(div);
 }
