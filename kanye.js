@@ -3,6 +3,7 @@
 const apiKey = 'AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE';
 
 var searchForm = document.getElementById('searchForm');
+var resultSection = document.getElementById('results');
 
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -17,9 +18,7 @@ searchForm.addEventListener('submit', function(event) {
 
   var apiFunctionArray = [apiYTfunction, apiKWfunction];
 
-  parallelFunction(apiFunctionArray, function(err, results) {
-    console.log(results);
-  });
+  parallelFunction(apiFunctionArray, callbackHandler);
 
 
 });
@@ -43,15 +42,54 @@ function setApi(url) {
   }
 }
 
-
 function parallelFunction(apiFunctionArray, callbackHandler) {
   var objArray = [];
 
   apiFunctionArray.forEach(function(apiFunction, index) {
     apiFunction(function(obj) {
-      objArray.push(obj);
-
+      objArray[index] = obj;
+      console.log(objArray);
       if(objArray.length === 2) callbackHandler(objArray);
     })
   });
+}
+
+
+
+//callback Handler
+function callbackHandler (objArray) {
+    clearPage();
+  if (objArray[1].album !== null && objArray[0].items.length > 0) {
+    successKwObj(objArray);
+    successYtObj(objArray);
+  } else {
+    errorHandler();
+  }
+}
+
+
+function errorHandler(){
+  var errorMsg = document.createElement('p');
+  errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
+  resultSection.appendChild(errorMsg);
+}
+
+function successYtObj(objArray){
+  var iframe = document.createElement('iframe');
+  iframe.src = "https://www.youtube.com/embed/" + objArray[0].items[0].id.videoId;
+  resultSection.appendChild(iframe);
+}
+
+function successKwObj(objArray){
+  var p = document.createElement('p')
+  p.innerText = objArray[1].lyrics;
+  var div = document.createElement('div');
+  div.appendChild(p);
+  resultSection.appendChild(div);
+}
+
+function clearPage(){
+  while (resultSection.firstChild) {
+    resultSection.removeChild(resultSection.firstChild);
+  }
 }
