@@ -7,7 +7,7 @@ var searchForm = document.getElementById('searchForm');
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
   var searchResult = event.target[0].value;
-  
+
   var apiYT = setApi('yt', searchResult);
   var apiKW = setApi('kw', searchResult);
 
@@ -38,23 +38,16 @@ function setApi(apiName, searchValue) {
 }
 
 
-//
-// function kanyeAPI(value){
-//   // var newValue = value.split(" ").join("_");
-//   var xhr = new XMLHttpRequest();
-//   // xhr.setRequestHeader("Authorization", "");
-//   xhr.onreadystatechange = function(){
-//     if(xhr.readyState == 4 && xhr.status == 200){
-//       //document.getElementById("results").textContent = JSON.parse(xhr.responseText);
-//       console.log(JSON.parse(xhr.responseText));
-//     }
-//   };
-//
-//
-//   xhr.open("GET","https://cors-anywhere.herokuapp.com/http://kanyerest.xyz/api/track/good_morning",true);
-//
-//   // xhr.setRequestHeader('Access-Control-Allow-Origin', "http://127.0.0.1:63213/")
-//   xhr.send();
-// }
-//
-// kanyeAPI();
+//callback Handler
+function callbackHandler (objArray) {
+  if (objArray[1][0] == null){
+    errorHandler();
+  } else {
+    successYtObj(ytObj);
+    successKwObj(kwObj);
+  }
+}
+
+function errorHandler(){
+
+}
