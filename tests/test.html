@@ -5,14 +5,26 @@
   <meta name="viewport" content="width=device-width">
   <title>QUnit Example</title>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.1.1.css">
-  <link rel="stylesheet" href="../public/styles.css">
+
 </head>
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
+  <header class="heading">
+    <h1>KANYE KARAOKE</h1>
+    <p>A site that allows you to sing along to your FAVOURITE Kanye songs.</p>
+  </header>
+
+  <form class="form" id="searchForm" action="index.html" method="post">
+    <input type="text" name="search" placeholder="What's your favourite Kanye song?" required>
+    <input type="submit" value="Submit">
+  </form>
+  <section id="results">
+
+  </section>
 
   <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+  <script src="../kanye.js"></script>
   <script src="tests.js"></script>
-  <script src="./../kanye.js"></script>
 </body>
 </html>
