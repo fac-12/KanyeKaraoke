@@ -69,6 +69,8 @@ function callbackHandler (objArray) {
 
 
 function errorHandler(){
+  var title = document.getElementById('songTitle');
+  title.innerText = '';
   var errorMsg = document.createElement('p');
   errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
   resultSection.appendChild(errorMsg);
