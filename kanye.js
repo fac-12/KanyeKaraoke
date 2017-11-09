@@ -6,55 +6,52 @@ var searchForm = document.getElementById('searchForm');
 
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
-  var searchResult = event.target[0].value;
-  
-  var apiYT = setApi('yt', searchResult);
-  var apiKW = setApi('kw', searchResult);
+  var searchValue = event.target[0].value;
 
-  apiKW();
-  apiYT();
+  var urlYT = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=kanye+west+' + searchValue.replace(' ', '+') + '&key=' + apiKey;
+  var urlKW = 'https://cors-anywhere.herokuapp.com/http://kanyerest.xyz/api/track/' + searchValue.replace(' ', '_');
+
+  var apiYTfunction = setApi(urlYT);
+  var apiKWfunction = setApi(urlKW);
+
+
+  var apiFunctionArray = [apiYTfunction, apiKWfunction];
+
+  parallelFunction(apiFunctionArray, function(err, results) {
+    console.log(results);
+  });
+
+
 });
 
-function setApi(apiName, searchValue) {
-  var url;
+function setApi(url) {
 
-  if(apiName === 'yt') url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=kanye+west+' + searchValue.replace(' ', '+') + '&key=' + apiKey;
-  else if(apiName === 'kw') url = 'https://cors-anywhere.herokuapp.com/http://kanyerest.xyz/api/track/' + searchValue.replace(' ', '_');
-
-  return function() {
+  return function(callback) {
     var xhr = new XMLHttpRequest();
+    var obj;
 
     xhr.onreadystatechange = function(){
-      if(xhr.readyState == 4 && xhr.status == 200){
-        //document.getElementById("results").textContent = JSON.parse(xhr.responseText);
-        console.log(JSON.parse(xhr.responseText));
+      if(xhr.readyState == 4){
+
+        obj = JSON.parse(xhr.responseText);
+        callback(obj);
       }
     };
 
     xhr.open("GET", url, true);
     xhr.send();
   }
-
 }
 
 
-//
-// function kanyeAPI(value){
-//   // var newValue = value.split(" ").join("_");
-//   var xhr = new XMLHttpRequest();
-//   // xhr.setRequestHeader("Authorization", "");
-//   xhr.onreadystatechange = function(){
-//     if(xhr.readyState == 4 && xhr.status == 200){
-//       //document.getElementById("results").textContent = JSON.parse(xhr.responseText);
-//       console.log(JSON.parse(xhr.responseText));
-//     }
-//   };
-//
-//
-//   xhr.open("GET","https://cors-anywhere.herokuapp.com/http://kanyerest.xyz/api/track/good_morning",true);
-//
-//   // xhr.setRequestHeader('Access-Control-Allow-Origin', "http://127.0.0.1:63213/")
-//   xhr.send();
-// }
-//
-// kanyeAPI();
+function parallelFunction(apiFunctionArray, callbackHandler) {
+  var objArray = [];
+
+  apiFunctionArray.forEach(function(apiFunction, index) {
+    apiFunction(function(obj) {
+      objArray.push(obj);
+
+      if(objArray.length === 2) callbackHandler(objArray);
+    })
+  });
+}
