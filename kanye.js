@@ -59,7 +59,7 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 //callback Handler
 function callbackHandler (objArray) {
     clearPage();
-  if (objArray[1].album !== null && objArray[0].items.length > 0) {
+  if (objArray[1].album !== null && objArray[0].items) {
     successKwObj(objArray);
     successYtObj(objArray);
   } else {
