@@ -4,10 +4,14 @@ const apiKey = 'AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE';
 
 var searchForm = document.getElementById('searchForm');
 var resultSection = document.getElementById('results');
+var loadingImg = document.getElementById('loadingImg');
 var searchValue;
 
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
+
+  loadingImg.classList.add('loading');
+
   searchValue = event.target[0].value.toLowerCase();
 
   var urlYT = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=kanye+west+' + searchValue.replace(' ', '+') + '&key=' + apiKey;
@@ -60,6 +64,7 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 //callback Handler
 function callbackHandler (objArray) {
     clearPage();
+    loadingImg.classList.remove('loading');
     updateSongTitle(searchValue);
   if (objArray[1].album !== null && objArray[0].items) {
     removeImage();
