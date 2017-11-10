@@ -62,11 +62,17 @@ function callbackHandler (objArray) {
     clearPage();
     updateSongTitle(searchValue);
   if (objArray[1].album !== null && objArray[0].items) {
+    removeImage();
     successYtObj(objArray);
     successKwObj(objArray);
   } else {
     errorHandler();
   }
+}
+
+function removeImage(){
+  var heading = document.getElementById("imgTwitter");
+  heading.removeChild(heading.lastChild);
 }
 
 
@@ -86,7 +92,6 @@ function successYtObj(objArray){
 }
 
 function successKwObj(objArray){
-
   var p = document.createElement('p')
   p.innerText = objArray[1].lyrics;
   p.classList = 'lyrics';
