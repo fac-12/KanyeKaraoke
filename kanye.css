@@ -35,6 +35,7 @@ h1, h2 {
   font-size: 5rem;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   letter-spacing: 5px;
+  text-align: center;
 }
 
 h2 {
@@ -108,18 +109,32 @@ h2 {
   overflow: scroll;
 }
 
+.sadImg {
+  display: block;
+}
+
+.errorMsg {
+  font-family: 'questknight';
+  font-size: 2rem;
+  font-weight: lighter;
+  margin-bottom: 2vh;
+  text-align: center;
+}
+.display.error {
+  flex-direction: column;
+}
+
 @media only screen and (max-width: 746px) {
   .display {
     justify-content: center;
   }
-  .lyric-container , .iframe, .imgheader  {
+  .lyric-container , .iframe, .imgheader , .display.error {
     width: 90vw;
     margin-bottom: 3vh;
   }
   .form__submitbutton{
     height: 12vw;
-width: 12vw;
-
+    width: 12vw;
   }
   .heading {
     padding: 5vh;

@@ -62,8 +62,8 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 function callbackHandler (objArray) {
     clearPage();
     updateSongTitle(searchValue);
+    var twitterImg = document.getElementById('twitterImg').style.display = 'none';
   if (objArray[1].album !== null && objArray[0].items) {
-    removeImage();
     successYtObj(objArray);
     successKwObj(objArray);
   } else {
@@ -71,19 +71,16 @@ function callbackHandler (objArray) {
   }
 }
 
-function removeImage(){
-  console.log("hello");
-  var heading = document.getElementById("imgTwitter");
-  // var twitterImg = document.getElementById("imgheader");
-  heading.removeChild(heading.lastChild);
-
-}
-
 
 function errorHandler(){
   var errorMsg = document.createElement('p');
-  errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
+  errorMsg.textContent = "Right now we can't handle your Kanye-Request";
+  errorMsg.classList = 'errorMsg';
+  var sadKanye = document.createElement('img');
+  sadKanye.src = "images/sadKanye.gif";
+  sadKanye.classList = 'sadImg';
   resultSection.appendChild(errorMsg);
+  resultSection.appendChild(sadKanye);
 }
 
 function successYtObj(objArray){
