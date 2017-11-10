@@ -12,20 +12,18 @@
 
 <body>
   <header class="heading">
-    <h1>KANYE KARAOKE</h1>
-
-    <img class="imgheader" id="twitterImg" src="images/kanyeheader2.png" alt="Image of a tweet by Kanye West">
-
-
-
+    <h1 tabindex="0">KANYE KARAOKE</h1>
+    <img tabindex="0" class="imgheader" id="twitterImg" src="images/kanyeheader2.png" alt="Image of a Kanye West tweet">
   </header>
 
   <form class="form" id="searchForm" action="index.html" method="post">
-    <input class="form__inputfield" type="text" name="search" placeholder="Enter song here" required>
-    <input class="form__submitbutton" type="submit" value="">
+    <input class="form__inputfield" type="text" name="search" placeholder="Enter Kanye song here" aria-label="Enter a Kanye song here" required>
+    <input class="form__submitbutton" type="submit" value="" role="button" aria-label="submits your kanye song search">
   </form>
-  <h2 id='songTitle'></h2>
-  <section id="results" class="display error">
+
+  <img class="loadingImg" id="loadingImg" src="images/loading.gif">
+  <h2 id='songTitle' aria-labelledby="Song Title" tabindex="0"></h2>
+  <section id="results" class="display">
 
   </section>
 

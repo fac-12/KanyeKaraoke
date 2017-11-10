@@ -56,10 +56,6 @@ h2 {
   letter-spacing: 2px;
   font-weight: bolder;
 }
-/*.imgheader {
-  padding-top: 5vh;
-  width: 40vw;
-}*/
 
 .form {
   display:flex;
@@ -97,6 +93,16 @@ h2 {
   flex-wrap: wrap;
 }
 
+.loadingImg {
+  width: 100px;
+  height: 100px;
+  display: none;
+}
+
+.loading {
+  display: block;
+}
+
 .iframe , .lyric-container{
   height: 50vh;
   width: 45vw;
@@ -120,7 +126,8 @@ h2 {
   margin-bottom: 2vh;
   text-align: center;
 }
-.display.error {
+
+.error {
   flex-direction: column;
 }
 
