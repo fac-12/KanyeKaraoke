@@ -50,11 +50,13 @@ function setApi(url) {
 
 function parallelFunction(apiFunctionArray, callbackHandler) {
   var objArray = [];
+  var counter = 0;
 
   apiFunctionArray.forEach(function(apiFunction, index) {
     apiFunction(function(obj) {
+      counter++;
       objArray[index] = obj;
-      if(objArray.length === 2) callbackHandler(objArray);
+      if(objArray.length === counter) callbackHandler(objArray);
     })
   });
 }
