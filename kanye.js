@@ -4,10 +4,11 @@ const apiKey = 'AIzaSyCR5In4DZaTP6IEZQ0r1JceuvluJRzQNLE';
 
 var searchForm = document.getElementById('searchForm');
 var resultSection = document.getElementById('results');
+var searchValue;
 
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
-  var searchValue = event.target[0].value;
+  searchValue = event.target[0].value;
 
   var urlYT = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=kanye+west+' + searchValue.replace(' ', '+') + '&key=' + apiKey;
   var urlKW = 'https://cors-anywhere.herokuapp.com/http://kanyerest.xyz/api/track/' + searchValue.replace(' ', '_');
@@ -17,6 +18,7 @@ searchForm.addEventListener('submit', function(event) {
 
 
   var apiFunctionArray = [apiYTfunction, apiKWfunction];
+
 
   parallelFunction(apiFunctionArray, callbackHandler);
 
@@ -59,6 +61,7 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 //callback Handler
 function callbackHandler (objArray) {
     clearPage();
+    updateSongTitle(searchValue);
   if (objArray[1].album !== null && objArray[0].items) {
     successYtObj(objArray);
     successKwObj(objArray);
@@ -82,9 +85,10 @@ function successYtObj(objArray){
 }
 
 function successKwObj(objArray){
-  var title = document.getElementById('songTitle');
-  var objTitle = objArray[1].title.replace('_', ' ');
-  title.innerText = objTitle.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+  // var title = document.getElementById('songTitle');
+  // var objTitle = objArray[1].title.replace('_', ' ');
+  // title.innerText = objTitle.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+
   var p = document.createElement('p')
   p.innerText = objArray[1].lyrics;
   p.classList = 'lyrics';
@@ -98,4 +102,9 @@ function clearPage(){
   while (resultSection.firstChild) {
     resultSection.removeChild(resultSection.firstChild);
   }
+}
+
+function updateSongTitle(newTitle) {
+  var title = document.getElementById('songTitle');
+  title.innerText = newTitle.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
 }

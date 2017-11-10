@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'questknight';
+  src: url("font/questknight.ttf");
+}
+
 * {
   margin:0;
   padding:0;
@@ -11,8 +16,12 @@ body {
   background-image: url('./images/kanyegiph.gif');
 }
 
-h1 {
+h1, h2 {
   padding: 2vh;
+  color: black;
+  font-family: 'questknight';
+  font-size: 5rem;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
 h2 {
@@ -38,7 +47,7 @@ h2 {
 .form {
   display:flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 40vw;
 }
 
@@ -46,18 +55,23 @@ h2 {
   display: flex;
   width: 80%;
   height: 5vh;
-  margin-right: -5vw;
+  margin-right: 2%;
 }
 
 .form__submitbutton {
-  border: none;
+  cursor: pointer;
   background: url('./images/kanyeFace.png');
-  background-size: 80%;
+  background-size: 120%;
   background-repeat: no-repeat;
   background-position: center;
-  height: 20vh;
-  width: 20vw;
+  height: 5vw;
+  width: 5vw;
   margin-right: -5vw;
+  border-radius: 100%;
+  border: solid 2px black;
+  -webkit-box-shadow: -13px -23px 153px 0px rgba(247,242,247,1);
+  -moz-box-shadow: -13px -23px 153px 0px rgba(247,242,247,1);
+  box-shadow: -13px -23px 153px 0px rgba(247,242,247,1);
 }
 
 .display {
