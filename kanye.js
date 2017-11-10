@@ -71,7 +71,7 @@ function callbackHandler (objArray) {
 }
 
 
-function errorHandler(){
+function errorHandler(){  
   var errorMsg = document.createElement('p');
   errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
   resultSection.appendChild(errorMsg);
