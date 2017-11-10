@@ -63,6 +63,7 @@ function callbackHandler (objArray) {
     clearPage();
     updateSongTitle(searchValue);
   if (objArray[1].album !== null && objArray[0].items) {
+    removeImage();
     successYtObj(objArray);
     successKwObj(objArray);
   } else {
@@ -70,8 +71,16 @@ function callbackHandler (objArray) {
   }
 }
 
+function removeImage(){
+  console.log("hello");
+  var heading = document.getElementById("imgTwitter");
+  // var twitterImg = document.getElementById("imgheader");
+  heading.removeChild(heading.lastChild);
 
-function errorHandler(){  
+}
+
+
+function errorHandler(){
   var errorMsg = document.createElement('p');
   errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
   resultSection.appendChild(errorMsg);
@@ -85,10 +94,6 @@ function successYtObj(objArray){
 }
 
 function successKwObj(objArray){
-  // var title = document.getElementById('songTitle');
-  // var objTitle = objArray[1].title.replace('_', ' ');
-  // title.innerText = objTitle.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
-
   var p = document.createElement('p')
   p.innerText = objArray[1].lyrics;
   p.classList = 'lyrics';
