@@ -8,7 +8,7 @@ var searchValue;
 
 searchForm.addEventListener('submit', function(event) {
   event.preventDefault();
-  searchValue = event.target[0].value;
+  searchValue = event.target[0].value.toLowerCase();
 
   var urlYT = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=kanye+west+' + searchValue.replace(' ', '+') + '&key=' + apiKey;
   var urlKW = 'https://cors-anywhere.herokuapp.com/http://kanyerest.xyz/api/track/' + searchValue.replace(' ', '_');
@@ -49,7 +49,7 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 
   apiFunctionArray.forEach(function(apiFunction, index) {
     apiFunction(function(obj) {
-      objArray[index] = obj;      
+      objArray[index] = obj;
       if(objArray.length === 2) callbackHandler(objArray);
     })
   });
