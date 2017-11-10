@@ -49,8 +49,7 @@ function parallelFunction(apiFunctionArray, callbackHandler) {
 
   apiFunctionArray.forEach(function(apiFunction, index) {
     apiFunction(function(obj) {
-      objArray[index] = obj;
-      console.log(objArray);
+      objArray[index] = obj;      
       if(objArray.length === 2) callbackHandler(objArray);
     })
   });
@@ -71,7 +70,7 @@ function callbackHandler (objArray) {
 }
 
 
-function errorHandler(){  
+function errorHandler(){
   var errorMsg = document.createElement('p');
   errorMsg.textContent = 'Kayne either doesn\'t sing this song or doesn\'t want you to sing!';
   resultSection.appendChild(errorMsg);
@@ -80,18 +79,19 @@ function errorHandler(){
 function successYtObj(objArray){
   var iframe = document.createElement('iframe');
   iframe.src = "https://www.youtube.com/embed/" + objArray[0].items[0].id.videoId;
+  iframe.setAttribute('aria-label', 'Youtube of your Kanye West song');
+  iframe.setAttribute('tabindex', 0);
   iframe.classList = 'iframe';
   resultSection.appendChild(iframe);
 }
 
 function successKwObj(objArray){
-  // var title = document.getElementById('songTitle');
-  // var objTitle = objArray[1].title.replace('_', ' ');
-  // title.innerText = objTitle.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
 
   var p = document.createElement('p')
   p.innerText = objArray[1].lyrics;
   p.classList = 'lyrics';
+  p.setAttribute('aria-label', 'lyrics to your Kanye song');
+  p.setAttribute('tabindex', '0')
   var div = document.createElement('div');
   div.classList = 'lyric-container';
   div.appendChild(p);
